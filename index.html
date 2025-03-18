@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- meta tags for character set, compatibility, and viewport settings -->
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio</title>
+  <!-- linking external stylesheets for styling and media queries -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="mediaqueries.css" />
+</head>
+
+<body>
+  <!-- desktop navigation bar -->
+  <nav id="desktop-nav">
+    <div class="logo">Nakul Patel</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <!-- mobile navigation bar with hamburger menu -->
+  <nav id="hamburger-nav">
+    <div class="logo">Nakul Patel</div>
+    <div class="hamburger-menu">
+      <div class="hamburger-icon" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul class="menu-links">
+        <li><a href="#about" onclick="toggleMenu()">About</a></li>
+        <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
+        <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+        <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+  <!-- profile section with image and introduction -->
+  <section id="profile">
+    <div class="section__pic-container">
+      <img src="./assets/headshot.png" alt="Nakul Patel Profile Picture" />
+    </div>
+    <div class="section__text">
+      <p class="section__text__p1">Hello, I'm</p>
+      <h1 class="title">Nakul Patel</h1>
+      <div class="context-text">
+        <p class="section__text__p2">I'm A <a href="" class="typewrite" data-period="2000" data-type='["Software Developer", "Data Scientist", "ML Engineer"]' style="text-decoration: none;"></a></p>
+      </div>
+      <div class="btn-container">
+        <button class="btn btn-color-2" onclick="window.open('./assets/nakul-patel-software-resume.pdf')">
+          Download CV
+        </button>
+        <button class="btn btn-color-1" onclick="location.href='#contact'">
+          Contact Info
+        </button>
+      </div>
+      <!-- social media icons for linkedin and github -->
+      <div id="socials-container">
+        <img src="./assets/linkedin.png" alt="My LinkedIn profile" class="icon"
+          onclick="location.href='https://www.linkedin.com/in/nakulpatel0306/'" />
+        <img src="./assets/github.png" alt="My Github profile" class="icon"
+          onclick="location.href='https://github.com/nakulpatel0306'" />
+      </div>
+    </div>
+  </section>
+  <!-- about section detailing personal and professional background -->
+  <section id="about">
+    <p class="section__text__p1">Get To Know More</p>
+    <h1 class="title">About Me</h1>
+    <div class="section-container">
+      <div class="about-details-container">
+        <div class="about-containers">
+          <div class="details-container">
+            <img src="./assets/experience.png" alt="Experience Icon" class="icon" />
+            <h3>Experience</h3>
+            <p>3+ Years <br />Software Development</p>
+          </div>
+          <div class="details-container">
+            <img src="./assets/education.png" alt="Education Icon" class="icon" />
+            <h3>Education</h3>
+            <p>BCS from University of Wilfrid Laurier<br />BBA from University of Wilfrid Laurier</p>
+          </div>
+        </div>
+        <div class="text-container" style="text-align: center;">
+          <p>
+            Hey, I’m Nakul! I’m a student at Wilfrid Laurier University, with a strong passion for technology and innovation. Pursuing a dual degree in CS and BBA, I'm dedicated to learning cutting-edge technologies and applying them to real-world problems. I'm also actively looking for internships to expand my practical experience and contribute to exciting projects in the tech industry. <br><br> When I’m not buried in my textbooks, you’ll find me breaking a sweat on the basketball court or hitting the gym. I love traveling and chasing adrenaline-fueled adventures, like cliff jumping—trust me, it’s definitely not for everyone! My perfect summer day? Just kicking back at the beach with friends, listening to some music, and diving into a competitive game of beach volleyball. I’m always eager to meet new friends, exchange ideas, and grow my network. Let’s connect and see what amazing things we can create together!
+          </p>
+        </div>
+      </div>
+    </div>
+    <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='#experience'" />
+  </section>
+  <!-- experience section showcasing professional timeline -->
+  <section id="experience">
+    <br>
+    <p class="section__text__p1">Explore My</p>
+    <h1 class="title">Experience</h1>
+    <div class="container">
+      <div class="timeline">
+        <ul>
+          <li>
+            <div class="timeline-content">
+              <h3 class="date">Jan 2025 - Apr 2025</h3>
+              <h1>Definity Financial Corp</h1>
+              <p>QA Automation Engineer, Internship</p>
+            </div>
+          </li>
+          <li>
+            <div class="timeline-content">
+              <h3 class="date">May 2024 - Aug 2024</h3>
+              <h1>Stouffville Chamber Of Commerce</h1>
+              <p>Data Analyst / Outreach Representative, Internship</p>
+            </div>
+          </li>
+          <li>
+            <div class="timeline-content">
+              <h3 class="date">May 2023 - Apr 2024</h3>
+              <h1>RIZE Sports Event Management</h1>
+              <p>Co-President / Executive Board Member, Startup</p>
+            </div>
+          </li>
+          <li>
+            <div class="timeline-content">
+              <h3 class="date">Jan 2023 - Aug 2023</h3>
+              <h1>Riipen Networks Inc</h1>
+              <p>Software Developer, Internship</p>
+            </div>
+          </li>
+          <li>
+            <div class="timeline-content">
+              <h3 class="date">Jul 2020 - Dec 2021</h3>
+              <h1>Staples Inc</h1>
+              <p>Technology Sales Area Representative / Technician, Part-Time</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='#projects'" />
+  </section>
+  <!-- projects section with details and links to projects -->
+  <section id="projects">
+    <p class="section__text__p1">Browse My Recent</p>
+    <h1 class="title">Projects</h1>
+    <div class="experience-details-container">
+      <div class="about-containers">
+        <div class="details-container color-container">
+          <div class="article-container">
+            <img src="./assets/project-1.jpg" alt="Classic Checkers Game" class="project-img" />
+          </div>
+          <h2 class="experience-sub-title project-title">Checkers Royale</h2>
+          <div class="btn-container">
+            <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/nakulpatel0306/classic-checkers-console-game'">
+              Github
+            </button>
+            <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/nakulpatel0306/classic-checkers-console-game'">
+              Live Demo
+            </button>
+          </div>
+        </div>
+        <div class="details-container color-container">
+          <div class="article-container">
+            <img src="./assets/project-2.jpg" alt="Job Finder App" class="project-img" />
+          </div>
+          <h2 class="experience-sub-title project-title">Nectar.ai (WIP)</h2>
+          <div class="btn-container">
+            <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/nakulpatel0306'">
+              Github
+            </button>
+            <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/nakulpatel0306'">
+              Live Demo
+            </button>
+          </div>
+        </div>
+        <div class="details-container color-container">
+          <div class="article-container">
+            <img src="./assets/project-3.jpg" alt="Student Grades Application" class="project-img"/>
+          </div>
+          <h2 class="experience-sub-title project-title">GradeGuru</h2>
+          <div class="btn-container">
+            <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/nakulpatel0306/student-grades-app'">
+              Github
+            </button>
+            <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/nakulpatel0306/student-grades-app'">
+              Live Demo
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='#contact'" />
+  </section>
+  <!-- contact section with email and LinkedIn profile link -->
+  <section id="contact">
+    <p class="section__text__p1">Get In Touch</p>
+    <h1 class="title">Contact Me</h1>
+    <div class="contact-info-upper-container">
+      <div class="contact-info-container">
+        <img src="./assets/email.png" alt="Email Icon" class="icon contact-icon email-icon" />
+        <p><a href="mailto:pate1079@mylaurier.ca">pate1079@mylaurier.ca</a></p>
+      </div>
+      <div class="contact-info-container">
+        <img src="./assets/linkedin.png" alt="LinkedIn Icon" class="icon contact-icon" />
+        <p><a href="https://www.linkedin.com/in/nakulpatel0306/">LinkedIn</a></p>
+      </div>
+    </div>
+  </section>
+  <!-- footer section with navigation links -->
+  <footer>
+    <nav>
+      <div class="nav-links-container">
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  </footer>
+  <!-- script for interactive elements -->
+  <script src="script.js"></script>
+</body>
+
+</html>

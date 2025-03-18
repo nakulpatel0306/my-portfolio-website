@@ -1,0 +1,564 @@
+/* import poppins font from google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+/* reset margin, padding and set box-sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* base body styles */
+body {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.6;
+}
+
+/* smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* paragraph color */
+p {
+  color: rgb(85, 85, 85);
+}
+
+/* link and button transition */
+a,
+.btn {
+  transition: all 300ms ease;
+}
+
+/* desktop navigation styling */
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 17vh;
+}
+
+/* navigation links styling */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  font-size: 1.5rem;
+}
+
+/* anchor tag styling */
+a {
+  color: black;
+  text-decoration: none;
+}
+
+/* hover effects for anchor tags */
+a:hover {
+  color: grey;
+  text-decoration: underline;
+  text-underline-offset: 1rem;
+}
+
+/* logo styling */
+.logo {
+  font-size: 2rem;
+}
+
+/* cursor style for logo on hover */
+.logo:hover {
+  cursor: default;
+}
+
+/* hamburger menu styles for mobile nav */
+#hamburger-nav {
+  display: none;
+}
+
+/* styling for hamburger icon */
+.hamburger-menu {
+  position: relative;
+  display: inline-block;
+}
+
+/* styling for hamburger menu icon */
+.hamburger-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 24px;
+  width: 30px;
+  cursor: pointer;
+}
+
+/* bars in hamburger icon */
+.hamburger-icon span {
+  width: 100%;
+  height: 2px;
+  background-color: black;
+  transition: all 0.3s ease-in-out;
+}
+
+/* hidden menu links styling */
+.menu-links {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  width: fit-content;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+/* menu link styling */
+.menu-links a {
+  display: block;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.5rem;
+  color: black;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+/* list styling in menu links */
+.menu-links li {
+  list-style: none;
+}
+
+/* styling for expanded menu links */
+.menu-links.open {
+  max-height: 300px;
+}
+
+/* animation for hamburger icon on open */
+.hamburger-icon.open span:first-child {
+  transform: rotate(45deg) translate(10px, 5px);
+}
+
+/* hide middle bar on hamburger menu when open */
+.hamburger-icon.open span:nth-child(2) {
+  opacity: 0;
+}
+
+/* animation for last bar on hamburger icon when open */
+.hamburger-icon.open span:last-child {
+  transform: rotate(-45deg) translate(10px, -5px);
+}
+
+/* common section styling */
+section {
+  padding-top: 4vh;
+  height: auto;
+  margin: 0 10rem;
+  min-height: fit-content;
+}
+
+/* container styling within sections */
+.section-container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-basis: auto;
+}
+
+/* profile section styling */
+#profile {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  height: auto;
+  padding: 5rem 0;
+}
+
+/* profile picture container styling */
+.section__pic-container {
+  display: flex;
+  height: 600px;
+  width: 600px;
+  margin: auto 0;
+}
+
+/* ensures images within containers fit well */
+.section__pic-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* text alignment in profile section */
+.section__text {
+  align-self: center;
+  text-align: center;
+}
+
+/* bold text for specific paragraphs */
+.section__text p {
+  font-weight: 600;
+}
+
+/* first paragraph styling in sections */
+.section__text__p1 {
+  text-align: center;
+}
+
+/* second paragraph styling in sections */
+.section__text__p2 {
+  font-size: 1.35rem;
+  margin-bottom: 1rem;
+  color: black;
+}
+
+/* title styling across sections */
+.title {
+  font-size: 3rem;
+  text-align: center;
+}
+
+/* container for social media icons */
+#socials-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+/* general icon styling, cursor pointer for clickable */
+.icon {
+  cursor: pointer;
+  height: 2rem;
+}
+
+/* button container styling */
+.btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* button styling */
+.btn {
+  font-weight: 600;
+  transition: all 300ms ease;
+  padding: 1rem;
+  width: 8rem;
+  border-radius: 2rem;
+}
+
+/* base styles for buttons with color classes */
+.btn-color-1,
+.btn-color-2 {
+  border: rgb(53, 53, 53) 0.1rem solid;
+}
+
+/* base styles for buttons with color classes */
+.btn-color-1:hover,
+.btn-color-2:hover {
+  cursor: pointer;
+}
+
+/* base styles for buttons with color classes */
+.btn-color-1,
+.btn-color-2:hover {
+  background: rgb(53, 53, 53);
+  color: white;
+}
+
+/* base styles for buttons with color classes */
+.btn-color-1:hover {
+  background: rgb(0, 0, 0);
+}
+
+/* base styles for buttons with color classes */
+.btn-color-2 {
+  background: none;
+}
+
+/* base styles for buttons with color classes */
+.btn-color-2:hover {
+  border: rgb(255, 255, 255) 0.1rem solid;
+}
+
+/* about section positioning */
+#about {
+  position: relative;
+}
+
+/* container gap and margin styles in about section */
+.about-containers {
+  gap: 2rem;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+/* about details container alignment */
+.about-details-container {
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* flex display for containers within about section */
+.about-containers,
+.about-details-container {
+  display: flex;
+}
+
+/* about picture styling, with responsive border radius and max-width */
+.about-pic {
+  border-radius: 2rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+/* positioning of arrow icon in sections */
+.arrow {
+  position: absolute;
+  right: -5rem;
+  bottom: 2.5rem;
+}
+
+/* detailed container styling within details section */
+.details-container {
+  padding: 1.5rem;
+  flex: 1;
+  background: white;
+  border-radius: 2rem;
+  border: rgb(53, 53, 53) 0.1rem solid;
+  border-color: rgb(163, 163, 163);
+  text-align: center;
+}
+
+/* experience section positioning */
+#experience {
+  position: relative;
+}
+
+#experience .container {
+  padding-top: 50px; /* Adjust only for the experience section */
+}
+
+/* subtitle styling in experience section */
+.experience-sub-title {
+  color: rgb(85, 85, 85);
+  font-weight: 600;
+  font-size: 1.75rem;
+  margin-bottom: 2rem;
+}
+
+/* details container alignment in experience section */
+.experience-details-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* article container styling within projects section */
+.article-container {
+  display: flex;
+  text-align: initial;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 2.5rem;
+  justify-content: space-around;
+}
+
+/* article specific styling, for alignment and spacing */
+article {
+  display: flex;
+  width: 10rem;
+  justify-content: space-around;
+  gap: 0.5rem;
+}
+
+/* non-pointer cursor for icons in articles */
+article .icon {
+  cursor: default;
+}
+
+/* projects section positioning */
+#projects {
+  position:relative;
+}
+
+#projects .container {
+  padding-top: 40px;
+}
+
+/* background and border color customization for containers in projects */
+.color-container {
+  border-color: rgb(163, 163, 163);
+  background: rgb(250, 250, 250);
+}
+
+/* project image styling with responsive border-radius */
+.project-img {
+  border-radius: 2rem;
+  width: 90%;
+  height:auto;
+}
+
+/* project title styling */
+.project-title {
+  margin: 1rem;
+  color: black;
+}
+
+/* button styling within project sections */
+.project-btn {
+  color: black;
+  border-color: rgb(163, 163, 163);
+}
+
+/* contact section layout and padding */
+#contact {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: auto;
+  padding: 5rem 0;
+}
+
+/* upper container styling in contact section */
+.contact-info-upper-container {
+  display: flex;
+  justify-content: center;
+  border-radius: 2rem;
+  border: rgb(53, 53, 53) 0.1rem solid;
+  border-color: rgb(163, 163, 163);
+  background: rgb(250, 250, 250);
+  margin: 2rem auto;
+  padding: 0.5rem;
+}
+
+/* contact information container alignment and spacing */
+.contact-info-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem;
+}
+
+/* larger font size for contact info paragraphs */
+.contact-info-container p {
+  font-size: larger;
+}
+
+/* default cursor for contact icons */
+.contact-icon {
+  cursor: default;
+}
+
+/* increased icon height for email icon */
+.email-icon {
+  height: 2.5rem;
+}
+
+/* footer section styling with margin and padding */
+footer {
+  height: auto;
+  margin: 0 1rem;
+  padding: 2rem 0;
+}
+
+/* center text alignment in footer */
+footer p {
+  text-align: center;
+}
+
+/* container styling in experience section */
+.container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 0;
+  background: white;
+}
+
+/* timeline styling within experience section */
+.timeline {
+  width: 80%;
+  height: auto;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* list styling in timeline */
+.timeline ul {
+  list-style: none;
+}
+
+/* list item styling within timeline */
+.timeline ul li {
+  padding: 20px;
+  background: rgb(250, 250, 250);
+  color: black;
+  border: rgb(53, 53, 53) 0.1rem solid;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* no margin for last list item in timeline */
+.timeline ul li:last-child {
+  margin-bottom: 0;
+}
+
+/* header styling within timeline content */
+.timeline-content h1 {
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 30px;
+  margin-bottom: 10px;
+}
+
+/* paragraph styling within timeline content */
+.timeline-content p {
+  font-size: 16px;
+  line-height: 30px;
+  font-weight: 300;
+}
+
+/* date styling within timeline content */
+.timeline-content .date {
+  font-size: 12px;
+  font-weight: 300;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+/* styling fix for about section image stretching */
+#about .section__pic-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+#about .about-pic {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* responsive media query for screens larger than 1000px */
+@media screen and (min-width: 1000px) {
+  #about .section__pic-container {
+    width: 900px;
+    height: auto;
+  }
+  
+  #about .about-pic {
+    object-fit: cover;
+    border-radius: 2rem;
+  }
+}
+
+/* content text styling */
+.content-text {
+  text-align: center;
+  margin: 1.5rem 0;
+}
