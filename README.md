@@ -1,61 +1,7 @@
 # Nakul Patel — Portfolio
 
-**The live site is [nakul-patel.dev](https://nakul-patel.dev).** That is the
-`main` branch of this repo, deployed to Cloudflare Workers on every push. Anything
-else here is an experiment and is not the site.
-
-One portfolio, four completely different designs, each on its own branch, each
-exploring a different inspiration. All of them are hand-built with vanilla HTML,
-CSS and JavaScript: no frameworks, no bundler, the same content (projects,
-experience, skills, contact) reimagined four ways.
-
-## The four designs
-
-| Branch | Design | Inspiration | Signature moments |
-|---|---|---|---|
-| [`main`](../../tree/main) — **live** | **Minimal** | The quiet single-column personal sites: lowercase, unhurried, no ornament | A ⌘K command palette, a theme change that wipes in as a circle, text that decodes on load, spring-physics tilt on the widget cards |
-| [`design/v3`](../../tree/design/v3) | **The World** | The great WebGL portfolios (Bruno Simon): a low-poly 3D island rendered with Three.js | Drag to orbit the island, hover six glowing pedestals (each project is a tiny 3D sculpture), click to jump to a project; preloader, inertia scroll, custom cursor |
-| [`design/v4`](../../tree/design/v4) | **Bento** | Dashboard bento grids: graphite tiles, a mint signal colour, everything scannable at a glance | 11 hero tiles that tilt in 3D on hover, dual skills marquees running in opposite directions, a drag-to-scroll photo strip |
-| [`design/v5`](../../tree/design/v5) | **Origin Story** | Superhero comics crossed with minimal editorial portfolios: ink black, crimson and gold, poster typography, halftone textures | Sections numbered like comic issues, cursor spotlight, cascading "power stats" skill bars |
-
-Only `main` is deployed. The other three branches are kept so the designs are
-still readable and runnable, not because anything serves them.
-
-There is a fifth design that never got a branch of its own, living only in this
-repo's history: an **IDE-style portfolio** (a working VS Code-like interface in a
-purple dark theme, with a file explorer, tabs, command palette and interactive
-terminal) at commit [`a2260e1`](../../commit/a2260e121e639547db4a0ac26cecf2063d0e09f8).
-
-## Shared DNA
-
-Every design carries the same principles:
-
-- **Vanilla everything** — plain HTML/CSS/JS with no framework and no bundler; the only third-party file anywhere in the repo is the vendored Three.js that `design/v3` needs
-- **Responsive** — desktop to mobile, with layout fallbacks where the fancy version doesn't fit
-- **Accessible motion** — every animation respects `prefers-reduced-motion`
-- **An easter egg** — the Konami code (↑ ↑ ↓ ↓ ← → ← → B A) does something in all of them
-
-## Running a design locally
-
-```bash
-git clone https://github.com/nakulpatel0306/my-portfolio-part-two.git
-cd my-portfolio-part-two
-
-git checkout main        # Minimal      (the live site)
-git checkout design/v3   # The World
-git checkout design/v4   # Bento
-git checkout design/v5   # Origin Story
-
-python3 -m http.server 5173
-# then open http://localhost:5173
-```
-
-Each branch's own README documents that design's palette, type system and
-features in detail.
-
----
-
-# The design on this branch — Minimal
+**The live site is [nakul-patel.dev](https://nakul-patel.dev).** This repository
+is that site: one branch, `main`, deployed to Cloudflare Workers on every push.
 
 The quiet one. A single narrow column, everything lowercase, no photo — just the
 name, the work, the projects and a way to reach me, in the order you'd actually
@@ -63,8 +9,22 @@ read them.
 
 The restraint is in the *design*, not the code: underneath there's a ⌘K command
 palette, a theme change that wipes in as a circle, text that decodes into place,
-and spring physics on the cards. Still vanilla HTML/CSS/JS, one web font, zero
-dependencies — every effect is a browser API used directly.
+and spring physics on the cards. Hand-written HTML, CSS and JavaScript, one web
+font, zero dependencies — every effect is a browser API used directly, and the
+build step is a copy.
+
+## Running it locally
+
+```bash
+git clone https://github.com/nakulpatel0306/my-portfolio-part-two.git
+cd my-portfolio-part-two
+
+python3 -m http.server 5173
+# then open http://localhost:5173
+```
+
+There is nothing to install. `npm run build` stages the deployable copy into
+`dist/`, which only matters when deploying; the source serves as-is.
 
 ## Features
 
@@ -146,9 +106,9 @@ The site runs on **Cloudflare Workers** at https://nakul-patel.dev.
 `npm run build` copies the four pages and the assets they actually reference
 into `dist/`, and `wrangler.jsonc` points Cloudflare at that folder. There is
 no Worker script and no bundler: Cloudflare serves the files and nothing else.
-Building into `dist/` rather than serving the repo root is what keeps `.git`,
-the workflow and this README off the public site, along with the ~20MB of
-photo sets the designs on the other branches use.
+Building into `dist/` rather than serving the repo root is what keeps `.git`
+and this README off the public site, along with the ~20MB of photo sets left
+over from the earlier designs, which this one does not use.
 
 ### Cloudflare, first time
 
@@ -190,6 +150,27 @@ Needs `npx wrangler login` once.
 There was a GitHub Pages workflow here until Cloudflare took over; it had been
 failing on every push since it was added, because Pages was never enabled on
 the repository, so it is gone rather than sitting in the tree going red.
+
+## Earlier designs
+
+This started as four portfolios, one per branch, each chasing a different
+inspiration. `main` is the one that shipped; the branches are gone, but the
+designs are still in the history:
+
+| Design | Idea | Commit |
+|---|---|---|
+| **The World** | A low-poly 3D island rendered with Three.js: drag to orbit, six glowing pedestals, each project a tiny sculpture | [`2895f13`](../../commit/2895f134d093a9b579ec3b8591035ba9a990ea41) |
+| **Bento** | Dashboard bento grids: graphite tiles, a mint signal colour, 11 hero tiles that tilt in 3D | [`53be7be`](../../commit/53be7be7b165078ca8e8921185d6ebf19dfe691b) |
+| **Origin Story** | Superhero comics crossed with editorial: ink black, crimson and gold, sections numbered like issues | [`27bf8d7`](../../commit/27bf8d7848bffbf08e3d42942aa6dd335db977e6) |
+| **IDE** | A working VS Code-like interface: file explorer, tabs, command palette, interactive terminal | [`a2260e1`](../../commit/a2260e121e639547db4a0ac26cecf2063d0e09f8) |
+
+Nothing points at the first three any more, so GitHub may eventually collect
+them. To keep one for good:
+
+```bash
+git tag the-world 2895f134d093a9b579ec3b8591035ba9a990ea41
+git push origin the-world
+```
 
 ---
 
