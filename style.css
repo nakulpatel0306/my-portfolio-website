@@ -911,12 +911,30 @@ body::before {
 /* ============================================================
    interests
    ============================================================ */
+.marquee {
+  margin-top: 20px;
+  overflow: hidden;
+  /* soften both ends so chips arrive and leave rather than popping */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+
 .interests {
   list-style: none;
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 20px;
+  width: max-content;
+  animation: interests-scroll 38s linear infinite;
+}
+
+/* the spacing sits on the item, not as a flex gap: with a gap the duplicated
+   half is half a gap wider than the original and the loop visibly jumps */
+.interests li { margin-right: 7px; }
+
+.marquee:hover .interests,
+.marquee:focus-within .interests { animation-play-state: paused; }
+
+@keyframes interests-scroll {
+  to { transform: translateX(-50%); }
 }
 .interests li {
   font-size: 12.5px;
@@ -932,6 +950,11 @@ body::before {
 
 @media (prefers-reduced-motion: reduce) {
   .skill-chips li { transition: none; }
+
+  /* no scrolling: show the nine once and let them wrap */
+  .marquee { -webkit-mask-image: none; mask-image: none; }
+  .interests { animation: none; width: auto; flex-wrap: wrap; row-gap: 7px; }
+  .interests li[aria-hidden="true"] { display: none; }
 }
 
 /* blur is expensive; drop it where it buys nothing */
