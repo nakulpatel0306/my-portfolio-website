@@ -13,6 +13,20 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "my-portfolio-part-two",
   "compatibility_date": "2026-09-26",
+  // The custom domains, created on deploy along with their DNS records,
+  // because the zone lives in the same Cloudflare account. Both are listed
+  // so the apex and the www host each serve the site rather than one of
+  // them dead-ending.
+  "routes": [
+    { "pattern": "nakul-patel.dev", "custom_domain": true },
+    { "pattern": "www.nakul-patel.dev", "custom_domain": true }
+  ],
+
+  // workers.dev stays on as a fallback URL while the domain settles. Set it
+  // to false once nakul-patel.dev serves the site, so there is one address
+  // for it rather than two.
+  "workers_dev": true,
+
   "assets": {
     "directory": "./dist",
     // an unknown path serves 404.html with a real 404 status, rather than

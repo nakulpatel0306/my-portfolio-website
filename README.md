@@ -152,10 +152,14 @@ Every push to `main` redeploys from then on.
 
 ### The custom domain
 
-**The worker -> Settings -> Domains & Routes -> Add -> Custom domain**, once
-for `nakul-patel.dev` and once for `www.nakul-patel.dev`. The domain is
-registered in the same Cloudflare account, so the DNS records and the
-certificate are issued automatically; there is nothing to add at a registrar.
+`nakul-patel.dev` and `www.nakul-patel.dev` are declared as custom-domain
+routes in `wrangler.jsonc`, so a deploy creates them and their DNS records
+itself: the zone is in the same Cloudflare account, and the certificate is
+issued automatically. Nothing to click, and nothing to add at a registrar.
+
+`workers_dev` is left on, which keeps `my-portfolio-part-two.<account>.workers.dev`
+serving the same site. Set it to `false` once the domain is settled, so the
+site answers on one address instead of two.
 
 `og:url` and `og:image` in `index.html` are the only absolute URLs in the
 project and already point at the custom domain.
