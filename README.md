@@ -6,7 +6,7 @@ My personal developer portfolio, built with plain HTML, CSS and JavaScript. One 
 
 Live site: https://nakul-patel.dev
 
-## Status
+## At a Glance
 
 - **State:** Live and maintained.
 - **Resume:** `assets/nakul-patel-software-resume.pdf` (last updated September 2026)
