@@ -125,8 +125,7 @@ top of it. Accent `#8b5cf6` light / `#a78bfa` dark.
 ├── build.js         # Copies the pages + the assets they reference into dist/
 ├── wrangler.jsonc   # Cloudflare Workers: serve dist/, and own the domain
 ├── package.json     # No dependencies; build / dev / deploy scripts
-├── .gitignore       # dist/, node_modules/, .wrangler/
-└── .github/workflows/pages.yml   # The GitHub Pages mirror (see Deploying)
+└── .gitignore       # dist/, node_modules/, .wrangler/
 ```
 
 ## Things to try
@@ -185,14 +184,12 @@ npm run deploy     # build, then npx wrangler deploy
 
 Needs `npx wrangler login` once.
 
-### The GitHub Pages mirror
+### There is only the one deploy
 
-`nakul-patel.dev` is the site. `.github/workflows/pages.yml` also publishes
-`main` to `https://nakulpatel0306.github.io/my-portfolio-part-two/` on every
-push, from the repo root rather than from `dist/`, which leaves a second copy
-of the same pages at a second address. It is a fallback, not the site: the
-link-preview tags, the resume and anything shared point at the custom domain.
-Delete the workflow to be rid of it.
+`nakul-patel.dev` is the site, and Cloudflare is the only thing that serves it.
+There was a GitHub Pages workflow here until Cloudflare took over; it had been
+failing on every push since it was added, because Pages was never enabled on
+the repository, so it is gone rather than sitting in the tree going red.
 
 ---
 
