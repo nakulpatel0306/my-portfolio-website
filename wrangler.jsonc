@@ -1,0 +1,22 @@
+{
+  // Cloudflare Workers, serving dist/ as static assets. There is no Worker
+  // script: the site is hand-written HTML, CSS and JS, so "main" is
+  // deliberately absent and Cloudflare serves the files directly.
+  //
+  // dist/ is produced by `npm run build`, which copies the five things the
+  // site needs. Pointing this at the repo root instead would upload .git,
+  // the workflow and the README along with it.
+  //
+  // In the Cloudflare dashboard:
+  //   Build command:  npm run build
+  //   Deploy command: npx wrangler deploy
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "my-portfolio-part-two",
+  "compatibility_date": "2026-09-26",
+  "assets": {
+    "directory": "./dist",
+    // an unknown path serves 404.html with a real 404 status, rather than
+    // silently handing back the home page
+    "not_found_handling": "404-page"
+  }
+}

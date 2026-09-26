@@ -110,6 +110,9 @@ top of it. Accent `#8b5cf6` light / `#a78bfa` dark.
 │   ├── apple-touch-icon.png  # Home-screen icon, 180×180
 │   ├── preview.png           # Link-preview card, 1200×630
 │   └── nakul-patel-software-resume.pdf
+├── build.js      # Copies the pages + referenced assets into dist/
+├── wrangler.jsonc  # Cloudflare Workers: serve dist/ as static assets
+├── package.json  # No dependencies; just build / dev / deploy scripts
 └── .github/workflows/pages.yml   # Publishes main to GitHub Pages on push
 ```
 
@@ -126,31 +129,51 @@ top of it. Accent `#8b5cf6` light / `#a78bfa` dark.
 
 ## Deploying
 
-`.github/workflows/pages.yml` publishes `main` to GitHub Pages on every push.
-It needs one manual step, once:
+The site runs on **Cloudflare Workers** at https://nakul-patel.dev.
 
-**Settings → Pages → Source → "GitHub Actions"**
+`npm run build` copies the four pages and the assets they actually reference
+into `dist/`, and `wrangler.jsonc` points Cloudflare at that folder. There is
+no Worker script and no bundler: Cloudflare serves the files and nothing else.
+Building into `dist/` rather than serving the repo root is what keeps `.git`,
+the workflow and this README off the public site, along with the ~20MB of
+photo sets the designs on the other branches use.
 
-The site then goes live at `https://nakulpatel0306.github.io/my-portfolio-part-two/`,
-which is the URL currently in the link-preview tags.
+### Cloudflare, first time
 
-### Pointing a custom domain at it
+**Workers & Pages -> Create -> Import a repository**, pick this repo, then:
 
-When the domain is registered:
+| Field | Value |
+| --- | --- |
+| Project name | `my-portfolio-part-two` |
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
 
-1. **Settings → Pages → Custom domain** — enter it and save. GitHub writes the
-   `CNAME` file into the repo for you; don't create it by hand.
-2. **Add the DNS records at the registrar.** For an apex domain
-   (`example.com`) that's four `A` records, plus four `AAAA` records if you
-   want IPv6; for a subdomain (`www.example.com`) it's a single `CNAME`
-   pointing at `nakulpatel0306.github.io`. Take the current IP addresses from
-   GitHub's own *"Managing a custom domain for your GitHub Pages site"* page
-   rather than from any copy — they have changed before.
-3. **Tick "Enforce HTTPS"** once the certificate is issued; that can take up to
-   an hour after DNS propagates.
-4. **Update two lines in `index.html`** — `og:url` and `og:image`. They are the
-   only absolute URLs in the project and are marked with a comment. Link
-   previews will otherwise keep pointing at the old Pages address.
+Every push to `main` redeploys from then on.
+
+### The custom domain
+
+**The worker -> Settings -> Domains & Routes -> Add -> Custom domain**, once
+for `nakul-patel.dev` and once for `www.nakul-patel.dev`. The domain is
+registered in the same Cloudflare account, so the DNS records and the
+certificate are issued automatically; there is nothing to add at a registrar.
+
+`og:url` and `og:image` in `index.html` are the only absolute URLs in the
+project and already point at the custom domain.
+
+### By hand
+
+```
+npm run deploy     # build, then npx wrangler deploy
+```
+
+Needs `npx wrangler login` once.
+
+### GitHub Pages, still there
+
+`.github/workflows/pages.yml` publishes `main` to
+`https://nakulpatel0306.github.io/my-portfolio-part-two/` on every push, from
+the repo root rather than from `dist/`. It is a spare copy of the same site;
+delete the workflow if one live URL is tidier.
 
 ---
 

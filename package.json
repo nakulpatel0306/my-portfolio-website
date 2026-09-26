@@ -1,0 +1,11 @@
+{
+  "name": "nakul-patel-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal portfolio. No framework, no bundler; the build is a copy into dist/.",
+  "scripts": {
+    "build": "node build.js",
+    "dev": "npx wrangler dev",
+    "deploy": "npm run build && npx wrangler deploy"
+  }
+}
