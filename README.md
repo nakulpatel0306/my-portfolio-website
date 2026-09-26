@@ -1,176 +1,60 @@
-# Nakul Patel — Portfolio
+# Nakul Patel - Portfolio Website
 
-**The live site is [nakul-patel.dev](https://nakul-patel.dev).** This repository
-is that site: one branch, `main`, deployed to Cloudflare Workers on every push.
+> **This is my current portfolio site.** It is live at https://nakul-patel.dev and is the one I keep updated.
 
-The quiet one. A single narrow column, everything lowercase, no photo — just the
-name, the work, the projects and a way to reach me, in the order you'd actually
-read them.
+My personal developer portfolio, built with plain HTML, CSS and JavaScript. One lowercase column covering my work, projects, education, skills and how to reach me, in light or dark.
 
-The restraint is in the *design*, not the code: underneath there's a ⌘K command
-palette, a theme change that wipes in as a circle, text that decodes into place,
-and spring physics on the cards. Hand-written HTML, CSS and JavaScript, one web
-font, zero dependencies — every effect is a browser API used directly, and the
-build step is a copy.
+Live site: https://nakul-patel.dev
 
-## Running it locally
+## Status
 
-```bash
-git clone https://github.com/nakulpatel0306/my-portfolio-part-two.git
-cd my-portfolio-part-two
-
-python3 -m http.server 5173
-# then open http://localhost:5173
-```
-
-There is nothing to install. `npm run build` stages the deployable copy into
-`dist/`, which only matters when deploying; the source serves as-is.
+- **State:** Live and maintained.
+- **Resume:** `assets/nakul-patel-software-resume.pdf` (last updated September 2026)
+- **Stack:** HTML, CSS and JavaScript. No framework or build step.
+- **Hosting:** Cloudflare Workers, deployed on every push to `main`.
 
 ## Features
 
-- **One column, 40rem wide** — the whole site is a single read, top to bottom, on every screen size, wide enough that rows don't wrap a single word onto a line of its own
-- **All lowercase** — written that way in the markup, not forced with `text-transform`, so it copies and reads as intended
-- **Light and dark** — a two-option switch (`light` / `dark`) sits at the top right; it starts on whichever the system prefers and the choice sticks from then on. An inline head script applies the stored theme before first paint, so there's no flash of the wrong colours
-- **A three-card widget row** — availability, location and current role, sitting under the name so the three things a recruiter screens on are answered before any scrolling. The résumé sits in the top bar, opposite the theme switch
-- **A liquid-glass surface** — the widget cards, theme switch, skill panel and command palette are translucent, blurred and saturated, with a highlight along the top lip and a specular reflection that tracks the pointer. Backdrop blur does nothing over a flat colour, so the page carries the mesh below for the glass to bend
-- **A background that drifts** — four soft violet pools, split across two fixed layers so they can move on different clocks (46s and 67s) and keep changing how they overlap, which is what stops them reading as circles. Only `transform` and `opacity` animate, both composited, so the 52px blur behind them is rasterised once rather than on every frame. Over the top sits a tile of desaturated SVG grain at plain alpha — blend modes collapse at both ends of the range, so `overlay` is invisible on paper white and `soft-light` is invisible on near-black. In dark it runs at 0.035, about two levels out of 255: texture, still dark
-- **A typewriter role line** — types a title, holds, backspaces and takes the next, cycling `software developer`, `ml engineer` and `full stack developer`. Deleting runs faster than typing, which is what makes it read as typing rather than as a ticker. A visually-hidden stable description sits behind it so screen readers get one sentence, not a stream
-- **A filterable skill deck** — 52 skills in six groups (languages, frameworks, tools, ml & data, engineering, growth), opening on a curated **strongest** set of 14 so the first glance is a readable mix rather than a wall. Every chip ships visible in the markup and the opening filter is applied unanimated before first paint, so the deck still reads with JS off. The chips *slide* to their new positions using FLIP (measure First, mutate, measure Last, Invert the delta as a transform, then Play it off), so filtering reads as rearranging rather than repainting
-- **Interests as a marquee** — the nine chips scroll past on a loop and stop under the pointer. The track is the list duplicated once, with the spacing on each item rather than as a flex gap, so the halfway point falls exactly on the copy and the loop never jumps. Under `prefers-reduced-motion` it stops scrolling and wraps as an ordinary row
-- **A pinned top bar** — résumé, socials and the theme switch stay put as the page scrolls. The frosted backing fades in only once the bar pins, driven by an `IntersectionObserver` on a one-pixel sentinel rather than a scroll handler
-- **Socials in two registers** — icon-only in the top bar beside the résumé, where a recruiter finds them without scrolling, and the same five links labelled in `elsewhere` at the foot. The icons carry `aria-label`s, so icon-only costs nothing to a screen reader
-- **Links that read as links** — a dotted rule under anything clickable that goes solid on hover, and a small arrow that fades in on the ones opening a new tab
-- **One icon set** — twelve hand-written inline SVGs at a single 1.75 stroke weight, inheriting `currentColor` so they re-tone with the theme
-- **A ⌘K command palette** — subsequence matching (`ghb` finds *open github*), matched characters highlighted as you type, full keyboard control, and `aria-activedescendant` wired to a real listbox. Jump to a section, switch theme, copy the email, open a link
-- **A theme change that wipes in** — the new palette grows as a circle from the button you clicked, via the View Transitions API driven by a `clipPath` keyframe on `::view-transition-new(root)`. Browsers without it get the plain instant swap
-- **Text that decodes on load** — the name and role resolve out of noise, each character settling at its own random moment so the word arrives raggedly instead of left to right
-- **Scroll rail and reveal-on-scroll** — a hairline progress bar driven by one `requestAnimationFrame` per scroll burst (never one per event), and an `IntersectionObserver` that staggers the first screenful and reveals the rest as you reach them
-- **Spring physics on the widget cards** — a real integrator, force into velocity into position with damping, so the tilt overshoots and settles rather than easing on a fixed curve. It stops its own RAF loop once at rest
-- **The easter egg, quietly** — the Konami code flips the lights and says `nice.`
-- **Accessible by default** — real landmarks and lists, a labelled theme group whose buttons carry `aria-pressed`, a palette that restores focus on close (with `preventScroll`, so a jump isn't yanked back), and contrast that holds in both themes
-- **Degrades honestly** — every effect is feature-detected and every one is inert under `prefers-reduced-motion`. Content is only hidden for reveal if the inline head script proved JS is alive, so with JS off the page renders in full rather than blank
+- Light and dark themes, remembered between visits
+- Command palette on Cmd+K for jumping around the page
+- Typewriter role line and text that decodes on load
+- Glass cards that tilt under the pointer, over a drifting background
+- Skills filtered into groups, interests scrolling on a loop
+- Every animation respects `prefers-reduced-motion`
 
-## Palette & type
-
-Paper `#fcfcfb` · ink `#17171a` · muted `#55555d` · faint `#74747c` · rule `#e7e7e3` · available `#4a9e6a`
-Dark: `#0f0f10` · `#ededee` · `#a1a1a9` · `#7e7e87` · `#232326` · `#5cba80`
-Every text tone clears WCAG AA (4.5:1) against its background in both themes.
-**Inter** 400/500/600 at 15px — one family, three weights, no display face
-
-Glass: a translucent fill over an 18px backdrop blur at 180% saturation, a hairline
-edge, an inset highlight along the top lip, and a pointer-tracked specular sweep in
-`soft-light`. Behind it, four blurred radial pools in violet, purple and deep violet
-(`#8b5cf6`, `#a855f7`, `#7c3aed`, `#6d28d9`) at 20–34% in light and 16–26% in dark,
-drifting on two clocks, with grain over the top at 0.05 light / 0.035 dark. The paper
-itself is `#fcfbfe`, a breath of violet, so the pools sit in the page rather than on
-top of it. Accent `#8b5cf6` light / `#a78bfa` dark.
-
-## Structure
+## Project Structure
 
 ```
 .
-├── index.html   # Intro + widgets, about, work, projects, education,
-│                #   skills, elsewhere
-├── 404.html     # Same shell, for a mistyped URL
-├── style.css    # Tokens for both themes, drifting mesh + grain, glass,
-│                #   skills, focus, print
-├── script.js    # Theme + view-transition wipe, scramble, rail, reveals, spring
-│                #   tilt, specular tracking, typewriter, FLIP skill filter,
-│                #   command palette
-├── assets/
-│   ├── favicon.svg           # Tab icon
-│   ├── apple-touch-icon.png  # Home-screen icon, 180×180
-│   ├── preview.png           # Link-preview card, 1200×630
-│   └── nakul-patel-software-resume.pdf
-├── build.js         # Copies the pages + the assets they reference into dist/
-├── wrangler.jsonc   # Cloudflare Workers: serve dist/, and own the domain
-├── package.json     # No dependencies; build / dev / deploy scripts
-└── .gitignore       # dist/, node_modules/, .wrangler/
+├── index.html       # Sections: Intro, About, Work, Projects, Education, Skills, Elsewhere
+├── 404.html         # Same shell, for a mistyped URL
+├── style.css        # Themes, background, glass, layout
+├── script.js        # Theme, command palette, typewriter, animations
+├── build.js         # Copies the site into dist/ for deployment
+├── wrangler.jsonc   # Cloudflare Workers config and the custom domains
+├── package.json     # Build and deploy scripts, no dependencies
+└── assets/          # Icons, link preview image and resume PDF
 ```
 
-## Things to try
+## Running Locally
 
-| | |
-|---|---|
-| <kbd>⌘</kbd><kbd>K</kbd> / <kbd>Ctrl</kbd><kbd>K</kbd> | open the command palette — then type `ghb`, or `zzz` to see it come up empty |
-| Click `light` / `dark` | the new theme wipes out in a circle from the button |
-| Reload | watch the name decode into place |
-| Hover a widget card | spring tilt that overshoots and settles, with the reflection following your pointer |
-| Click a skill group | the chips slide to their new places rather than jumping |
-| <kbd>↑</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd><kbd>←</kbd><kbd>→</kbd><kbd>B</kbd><kbd>A</kbd> | flips the lights and says `nice.` |
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/nakulpatel0306/my-portfolio-part-two.git
+   cd my-portfolio-part-two
+   ```
+2. Open `index.html` in your browser, or start a local server:
+   ```bash
+   python3 -m http.server 5173
+   ```
+   Then visit `http://localhost:5173`.
 
 ## Deploying
 
-The site runs on **Cloudflare Workers** at https://nakul-patel.dev.
+Cloudflare builds and deploys on every push to `main`: `npm run build` copies the site into `dist/`, then `npx wrangler deploy` uploads it. The `nakul-patel.dev` and `www.nakul-patel.dev` domains are declared in `wrangler.jsonc`, so a deploy creates them and their DNS records itself.
 
-`npm run build` copies the four pages and the assets they actually reference
-into `dist/`, and `wrangler.jsonc` points Cloudflare at that folder. There is
-no Worker script and no bundler: Cloudflare serves the files and nothing else.
-Building into `dist/` rather than serving the repo root is what keeps `.git`,
-this README and the tooling off the public site.
+To deploy by hand, run `npm run deploy`. It needs `npx wrangler login` once.
 
-### Cloudflare, first time
+## Previous Versions
 
-**Workers & Pages -> Create -> Import a repository**, pick this repo, then:
-
-| Field | Value |
-| --- | --- |
-| Project name | `my-portfolio-part-two` |
-| Build command | `npm run build` |
-| Deploy command | `npx wrangler deploy` |
-
-Every push to `main` redeploys from then on.
-
-### The custom domain
-
-`nakul-patel.dev` and `www.nakul-patel.dev` are declared as custom-domain
-routes in `wrangler.jsonc`, so a deploy creates them and their DNS records
-itself: the zone is in the same Cloudflare account, and the certificate is
-issued automatically. Nothing to click, and nothing to add at a registrar.
-
-`workers_dev` is left on, which keeps `my-portfolio-part-two.<account>.workers.dev`
-serving the same site. Set it to `false` once the domain is settled, so the
-site answers on one address instead of two.
-
-`og:url` and `og:image` in `index.html` are the only absolute URLs in the
-project and already point at the custom domain.
-
-### By hand
-
-```
-npm run deploy     # build, then npx wrangler deploy
-```
-
-Needs `npx wrangler login` once.
-
-### There is only the one deploy
-
-`nakul-patel.dev` is the site, and Cloudflare is the only thing that serves it.
-There was a GitHub Pages workflow here until Cloudflare took over; it had been
-failing on every push since it was added, because Pages was never enabled on
-the repository, so it is gone rather than sitting in the tree going red.
-
-## Earlier designs
-
-This started as four portfolios, one per branch, each chasing a different
-inspiration. `main` is the one that shipped; the branches are gone, but the
-designs are still in the history:
-
-| Design | Idea | Commit |
-|---|---|---|
-| **The World** | A low-poly 3D island rendered with Three.js: drag to orbit, six glowing pedestals, each project a tiny sculpture | [`2895f13`](../../commit/2895f134d093a9b579ec3b8591035ba9a990ea41) |
-| **Bento** | Dashboard bento grids: graphite tiles, a mint signal colour, 11 hero tiles that tilt in 3D | [`53be7be`](../../commit/53be7be7b165078ca8e8921185d6ebf19dfe691b) |
-| **Origin Story** | Superhero comics crossed with editorial: ink black, crimson and gold, sections numbered like issues | [`27bf8d7`](../../commit/27bf8d7848bffbf08e3d42942aa6dd335db977e6) |
-| **IDE** | A working VS Code-like interface: file explorer, tabs, command palette, interactive terminal | [`a2260e1`](../../commit/a2260e121e639547db4a0ac26cecf2063d0e09f8) |
-
-Nothing points at the first three any more, so GitHub may eventually collect
-them. To keep one for good:
-
-```bash
-git tag the-world 2895f134d093a9b579ec3b8591035ba9a990ea41
-git push origin the-world
-```
-
----
-
-**Nakul Patel** · CS + BBA @ Wilfrid Laurier University · [LinkedIn](https://www.linkedin.com/in/nakulpatel0306/) · [GitHub](https://github.com/nakulpatel0306)
+Four earlier designs are in this repo's history: The World `2895f13`, Bento `53be7be`, Origin Story `27bf8d7` and an IDE-style build `a2260e1`. The site before all of them is archived at [portfolio-website-archive](https://github.com/nakulpatel0306/portfolio-website-archive).
