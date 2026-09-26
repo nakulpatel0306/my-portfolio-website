@@ -24,6 +24,11 @@
   --aurora-1: rgba(139, 92, 246, 0.34);
   --aurora-2: rgba(168, 85, 247, 0.27);
   --aurora-3: rgba(124, 58, 237, 0.24);
+  --aurora-4: rgba(109, 40, 217, 0.20);
+  /* film grain. grey speckle at plain alpha: blend modes collapse at both
+     ends of the range, so overlay is invisible on paper white and soft-light
+     is invisible on near-black. */
+  --grain: 0.05;
 
   --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
@@ -50,10 +55,14 @@
     --glass-lo: rgba(0, 0, 0, 0.28);
     --glass-spec: rgba(255, 255, 255, 0.10);
     --glass-drop: rgba(0, 0, 0, 0.35);
-  --accent: #a78bfa;
+    --accent: #a78bfa;
     --aurora-1: rgba(139, 92, 246, 0.26);
     --aurora-2: rgba(192, 132, 252, 0.16);
     --aurora-3: rgba(109, 40, 217, 0.22);
+    --aurora-4: rgba(139, 92, 246, 0.16);
+    /* lighter than the page, because grain on near-black can only show by
+       lifting it. 0.035 is about two levels out of 255: texture, still dark. */
+    --grain: 0.035;
   }
 }
 
@@ -77,6 +86,8 @@
   --aurora-1: rgba(139, 92, 246, 0.26);
   --aurora-2: rgba(192, 132, 252, 0.16);
   --aurora-3: rgba(109, 40, 217, 0.22);
+  --aurora-4: rgba(139, 92, 246, 0.16);
+  --grain: 0.035;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -783,23 +794,94 @@ kbd {
 .lost-back a:hover { color: var(--text); border-bottom-color: var(--text); }
 
 /* ============================================================
-   glass — an Apple-ish liquid-glass treatment.
+   the background — a drifting mesh under a layer of film grain.
 
-   Blur needs something behind it or it does nothing, so the page
-   carries a faint aurora (below) for the glass to pick up and bend.
+   Three layers, all fixed, all behind the content:
+
+     html::before  two pools, upper left and upper right   (z -3)
+     body::before  two pools, lower right and lower left   (z -2)
+     body::after   the grain                               (z -1)
+
+   The pools are split across two elements so they can drift on
+   different clocks. One layer on its own can only slide as a block;
+   two sliding past each other keep changing how they overlap, which
+   is what stops the mesh reading as a set of circles.
+
+   Only transform and opacity animate. Both are composited, so the
+   blur behind them is rasterised once rather than on every frame.
+
+   Blur also needs something behind it or it does nothing, so this
+   doubles as the thing the glass below picks up and bends.
    ============================================================ */
+html::before,
 body::before {
   content: '';
   position: fixed;
   inset: -25%;
+  z-index: -3;
+  pointer-events: none;
+  filter: blur(52px);
+  will-change: transform, opacity;
+}
+
+html::before {
+  background:
+    radial-gradient(62% 52% at 4% 2%, var(--aurora-1), transparent 64%),
+    radial-gradient(56% 46% at 98% 10%, var(--aurora-2), transparent 66%);
+  animation: drift-a 46s ease-in-out infinite;
+}
+
+body::before {
+  z-index: -2;
+  background:
+    radial-gradient(60% 50% at 94% 98%, var(--aurora-3), transparent 66%),
+    radial-gradient(54% 44% at 8% 92%, var(--aurora-4), transparent 66%);
+  animation: drift-b 67s ease-in-out infinite;
+}
+
+/* Travel is measured against each layer's own box, which is 150% of the
+   viewport with 25% of overhang on every side, so 12% of travel and a
+   tenth of growth never pull an edge into view. The opacity swing does
+   most of the visible work: the pools are soft enough that sliding them
+   alone barely moves a pixel. */
+@keyframes drift-a {
+  0%, 100% { transform: translate3d(0, 0, 0); opacity: 0.82; }
+  50%      { transform: translate3d(12%, -8%, 0); opacity: 1; }
+}
+
+@keyframes drift-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
+  50%      { transform: translate3d(-12%, 8%, 0) scale(1.1); opacity: 0.78; }
+}
+
+/* The blanket reduced-motion rule below cuts every animation to 0.01ms,
+   which would leave these two parked on their last keyframe and a shade
+   dimmer than intended. Sit them still at full strength instead. */
+@media (prefers-reduced-motion: reduce) {
+  html::before,
+  body::before {
+    animation: none;
+    opacity: 1;
+    will-change: auto;
+  }
+}
+
+/* grain: one 200px tile of SVG noise, desaturated so it is speckle
+   and not coloured confetti, repeated across the viewport */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
   z-index: -1;
   pointer-events: none;
-  background:
-    radial-gradient(38% 32% at 16% 10%, var(--aurora-1), transparent 70%),
-    radial-gradient(34% 30% at 86% 28%, var(--aurora-2), transparent 70%),
-    radial-gradient(42% 34% at 60% 92%, var(--aurora-3), transparent 72%);
-  filter: blur(36px);
+  opacity: var(--grain);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
 }
+
+/* ============================================================
+   glass — an Apple-ish liquid-glass treatment
+   ============================================================ */
 
 .glass,
 .widget,
@@ -959,7 +1041,7 @@ body::before {
 
 /* blur is expensive; drop it where it buys nothing */
 @media print {
-  body::before { display: none; }
+  html::before, body::before, body::after { display: none; }
   .glass, .widget, .skill-panel, .skill-chips li {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;

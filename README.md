@@ -60,7 +60,8 @@ dependencies — every effect is a browser API used directly.
 - **All lowercase** — written that way in the markup, not forced with `text-transform`, so it copies and reads as intended
 - **Light and dark** — a two-option switch (`light` / `dark`) sits at the top right; it starts on whichever the system prefers and the choice sticks from then on. An inline head script applies the stored theme before first paint, so there's no flash of the wrong colours
 - **A three-card widget row** — availability, location and current role, sitting under the name so the three things a recruiter screens on are answered before any scrolling. The résumé sits in the top bar, opposite the theme switch
-- **A liquid-glass surface** — the widget cards, theme switch, skill panel and command palette are translucent, blurred and saturated, with a highlight along the top lip and a specular reflection that tracks the pointer. Backdrop blur does nothing over a flat colour, so the page carries a faint three-blob aurora for the glass to bend
+- **A liquid-glass surface** — the widget cards, theme switch, skill panel and command palette are translucent, blurred and saturated, with a highlight along the top lip and a specular reflection that tracks the pointer. Backdrop blur does nothing over a flat colour, so the page carries the mesh below for the glass to bend
+- **A background that drifts** — four soft violet pools, split across two fixed layers so they can move on different clocks (46s and 67s) and keep changing how they overlap, which is what stops them reading as circles. Only `transform` and `opacity` animate, both composited, so the 52px blur behind them is rasterised once rather than on every frame. Over the top sits a tile of desaturated SVG grain at plain alpha — blend modes collapse at both ends of the range, so `overlay` is invisible on paper white and `soft-light` is invisible on near-black. In dark it runs at 0.035, about two levels out of 255: texture, still dark
 - **A typewriter role line** — types a title, holds, backspaces and takes the next, cycling `software developer`, `ml engineer` and `full stack developer`. Deleting runs faster than typing, which is what makes it read as typing rather than as a ticker. A visually-hidden stable description sits behind it so screen readers get one sentence, not a stream
 - **A filterable skill deck** — 52 skills in six groups (languages, frameworks, tools, ml & data, engineering, growth), opening on a curated **strongest** set of 14 so the first glance is a readable mix rather than a wall. Every chip ships visible in the markup and the opening filter is applied unanimated before first paint, so the deck still reads with JS off. The chips *slide* to their new positions using FLIP (measure First, mutate, measure Last, Invert the delta as a transform, then Play it off), so filtering reads as rearranging rather than repainting
 - **Interests as a marquee** — the nine chips scroll past on a loop and stop under the pointer. The track is the list duplicated once, with the spacing on each item rather than as a flex gap, so the halfway point falls exactly on the copy and the loop never jumps. Under `prefers-reduced-motion` it stops scrolling and wraps as an ordinary row
@@ -86,9 +87,10 @@ Every text tone clears WCAG AA (4.5:1) against its background in both themes.
 
 Glass: a translucent fill over an 18px backdrop blur at 180% saturation, a hairline
 edge, an inset highlight along the top lip, and a pointer-tracked specular sweep in
-`soft-light`. Behind it, three blurred radial blobs in violet, purple and deep violet
-(`#8b5cf6`, `#a855f7`, `#7c3aed`) at 24–34% in light and 16–26% in dark. The paper
-itself is `#fcfbfe`, a breath of violet, so the blobs sit in the page rather than on
+`soft-light`. Behind it, four blurred radial pools in violet, purple and deep violet
+(`#8b5cf6`, `#a855f7`, `#7c3aed`, `#6d28d9`) at 20–34% in light and 16–26% in dark,
+drifting on two clocks, with grain over the top at 0.05 light / 0.035 dark. The paper
+itself is `#fcfbfe`, a breath of violet, so the pools sit in the page rather than on
 top of it. Accent `#8b5cf6` light / `#a78bfa` dark.
 
 ## Structure
@@ -98,7 +100,8 @@ top of it. Accent `#8b5cf6` light / `#a78bfa` dark.
 ├── index.html   # Intro + widgets, about, work, projects, education,
 │                #   skills, elsewhere
 ├── 404.html     # Same shell, for a mistyped URL
-├── style.css    # Tokens for both themes, glass + aurora, skills, focus, print
+├── style.css    # Tokens for both themes, drifting mesh + grain, glass,
+│                #   skills, focus, print
 ├── script.js    # Theme + view-transition wipe, scramble, rail, reveals, spring
 │                #   tilt, specular tracking, typewriter, FLIP skill filter,
 │                #   command palette
