@@ -40,8 +40,8 @@ Live site: https://nakul-patel.dev
 
 1. Clone the repo:
    ```bash
-   git clone https://github.com/nakulpatel0306/my-portfolio-part-two.git
-   cd my-portfolio-part-two
+   git clone https://github.com/nakulpatel0306/my-portfolio-website.git
+   cd my-portfolio-website
    ```
 2. Open `index.html` in your browser, or start a local server:
    ```bash
