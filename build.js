@@ -4,11 +4,10 @@
 
    No dependencies and no bundling: the site is hand-written HTML, CSS and
    JS, so "building" it is a copy. The one piece of thinking here is which
-   assets come along. The repo still carries the photo sets the older
-   designs on the other branches use, about 20MB of them, and none of it
-   belongs on this site, so the pages are scanned for the assets they
-   actually reference and only those are copied. Reference a new one from
-   the markup and it ships; nothing to remember to update here. */
+   assets come along: the pages are scanned for the ones they actually
+   reference and only those are copied, so an asset that stops being used
+   stops shipping. Reference a new one from the markup and it ships;
+   nothing to remember to update here. */
 const { cpSync, rmSync, mkdirSync, readFileSync, existsSync } = require('node:fs');
 const { dirname } = require('node:path');
 
