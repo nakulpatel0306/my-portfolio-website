@@ -106,9 +106,8 @@ The site runs on **Cloudflare Workers** at https://nakul-patel.dev.
 `npm run build` copies the four pages and the assets they actually reference
 into `dist/`, and `wrangler.jsonc` points Cloudflare at that folder. There is
 no Worker script and no bundler: Cloudflare serves the files and nothing else.
-Building into `dist/` rather than serving the repo root is what keeps `.git`
-and this README off the public site, along with the ~20MB of photo sets left
-over from the earlier designs, which this one does not use.
+Building into `dist/` rather than serving the repo root is what keeps `.git`,
+this README and the tooling off the public site.
 
 ### Cloudflare, first time
 
