@@ -1,45 +1,57 @@
-# Nakul Patel — Portfolio Design Lab
+# Nakul Patel — Portfolio
 
-One portfolio, four completely different designs — each on its own branch, each exploring a different inspiration. All of them are hand-built with vanilla HTML, CSS and JavaScript: no frameworks, no build step, same content (projects, experience, skills, contact) reimagined four ways.
+**The live site is [nakul-patel.dev](https://nakul-patel.dev).** That is the
+`main` branch of this repo, deployed to Cloudflare Workers on every push. Anything
+else here is an experiment and is not the site.
 
-**`main` carries the Minimal design**, documented in full further down. The other three live on their own branches.
+One portfolio, four completely different designs, each on its own branch, each
+exploring a different inspiration. All of them are hand-built with vanilla HTML,
+CSS and JavaScript: no frameworks, no bundler, the same content (projects,
+experience, skills, contact) reimagined four ways.
 
-## 🎨 The four designs
+## The four designs
 
 | Branch | Design | Inspiration | Signature moments |
 |---|---|---|---|
-| [`main`](../../tree/main) | **Minimal** | The quiet single-column personal sites — lowercase, unhurried, no ornament | A ⌘K command palette, a theme change that wipes in as a circle, text that decodes on load, spring-physics tilt on the widget cards |
-| [`design/v3`](../../tree/design/v3) | **The World** | The great WebGL portfolios (Bruno Simon) — a low-poly 3D island rendered with Three.js | Drag to orbit the island, hover six glowing pedestals (each project is a tiny 3D sculpture), click to jump to a project; preloader, inertia scroll, custom cursor |
-| [`design/v4`](../../tree/design/v4) | **Bento** | Dashboard bento grids — graphite tiles, a mint signal colour, everything scannable at a glance | 11 hero tiles that tilt in 3D on hover, dual skills marquees running in opposite directions, a drag-to-scroll photo strip |
-| [`design/v5`](../../tree/design/v5) | **Origin Story** | Superhero comics × minimal editorial portfolios — ink black, crimson & gold, poster typography, halftone textures | Sections numbered like comic issues, cursor spotlight, cascading "power stats" skill bars |
+| [`main`](../../tree/main) — **live** | **Minimal** | The quiet single-column personal sites: lowercase, unhurried, no ornament | A ⌘K command palette, a theme change that wipes in as a circle, text that decodes on load, spring-physics tilt on the widget cards |
+| [`design/v3`](../../tree/design/v3) | **The World** | The great WebGL portfolios (Bruno Simon): a low-poly 3D island rendered with Three.js | Drag to orbit the island, hover six glowing pedestals (each project is a tiny 3D sculpture), click to jump to a project; preloader, inertia scroll, custom cursor |
+| [`design/v4`](../../tree/design/v4) | **Bento** | Dashboard bento grids: graphite tiles, a mint signal colour, everything scannable at a glance | 11 hero tiles that tilt in 3D on hover, dual skills marquees running in opposite directions, a drag-to-scroll photo strip |
+| [`design/v5`](../../tree/design/v5) | **Origin Story** | Superhero comics crossed with minimal editorial portfolios: ink black, crimson and gold, poster typography, halftone textures | Sections numbered like comic issues, cursor spotlight, cascading "power stats" skill bars |
 
-There's a fifth design that never got a branch of its own, living only in this repo's history: an **IDE-style portfolio** (a working VS Code-like interface in a purple dark theme, with a file explorer, tabs, command palette and interactive terminal) at commit [`a2260e1`](../../commit/a2260e121e639547db4a0ac26cecf2063d0e09f8).
+Only `main` is deployed. The other three branches are kept so the designs are
+still readable and runnable, not because anything serves them.
 
-## ✦ Shared DNA
+There is a fifth design that never got a branch of its own, living only in this
+repo's history: an **IDE-style portfolio** (a working VS Code-like interface in a
+purple dark theme, with a file explorer, tabs, command palette and interactive
+terminal) at commit [`a2260e1`](../../commit/a2260e121e639547db4a0ac26cecf2063d0e09f8).
+
+## Shared DNA
 
 Every design carries the same principles:
 
-- **Vanilla everything** — plain HTML/CSS/JS with no framework and no build step; the only third-party file anywhere in the repo is the vendored Three.js that `design/v3` needs
+- **Vanilla everything** — plain HTML/CSS/JS with no framework and no bundler; the only third-party file anywhere in the repo is the vendored Three.js that `design/v3` needs
 - **Responsive** — desktop to mobile, with layout fallbacks where the fancy version doesn't fit
 - **Accessible motion** — every animation respects `prefers-reduced-motion`
 - **An easter egg** — the Konami code (↑ ↑ ↓ ↓ ← → ← → B A) does something in all of them
 
-## 🚀 Run any design locally
+## Running a design locally
 
 ```bash
 git clone https://github.com/nakulpatel0306/my-portfolio-part-two.git
 cd my-portfolio-part-two
 
-git checkout main        # Minimal      (this one)
+git checkout main        # Minimal      (the live site)
 git checkout design/v3   # The World
 git checkout design/v4   # Bento
 git checkout design/v5   # Origin Story
 
 python3 -m http.server 5173
-# → http://localhost:5173
+# then open http://localhost:5173
 ```
 
-Each branch's own README documents that design's palette, type system and features in detail.
+Each branch's own README documents that design's palette, type system and
+features in detail.
 
 ---
 
@@ -110,10 +122,11 @@ top of it. Accent `#8b5cf6` light / `#a78bfa` dark.
 │   ├── apple-touch-icon.png  # Home-screen icon, 180×180
 │   ├── preview.png           # Link-preview card, 1200×630
 │   └── nakul-patel-software-resume.pdf
-├── build.js      # Copies the pages + referenced assets into dist/
-├── wrangler.jsonc  # Cloudflare Workers: serve dist/ as static assets
-├── package.json  # No dependencies; just build / dev / deploy scripts
-└── .github/workflows/pages.yml   # Publishes main to GitHub Pages on push
+├── build.js         # Copies the pages + the assets they reference into dist/
+├── wrangler.jsonc   # Cloudflare Workers: serve dist/, and own the domain
+├── package.json     # No dependencies; build / dev / deploy scripts
+├── .gitignore       # dist/, node_modules/, .wrangler/
+└── .github/workflows/pages.yml   # The GitHub Pages mirror (see Deploying)
 ```
 
 ## Things to try
@@ -172,12 +185,14 @@ npm run deploy     # build, then npx wrangler deploy
 
 Needs `npx wrangler login` once.
 
-### GitHub Pages, still there
+### The GitHub Pages mirror
 
-`.github/workflows/pages.yml` publishes `main` to
-`https://nakulpatel0306.github.io/my-portfolio-part-two/` on every push, from
-the repo root rather than from `dist/`. It is a spare copy of the same site;
-delete the workflow if one live URL is tidier.
+`nakul-patel.dev` is the site. `.github/workflows/pages.yml` also publishes
+`main` to `https://nakulpatel0306.github.io/my-portfolio-part-two/` on every
+push, from the repo root rather than from `dist/`, which leaves a second copy
+of the same pages at a second address. It is a fallback, not the site: the
+link-preview tags, the resume and anything shared point at the custom domain.
+Delete the workflow to be rid of it.
 
 ---
 
