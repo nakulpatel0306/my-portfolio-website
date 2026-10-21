@@ -270,6 +270,25 @@ h2 {
 
 .role { color: var(--muted); }
 
+.who {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+/* greyscale so the photo's warm background doesn't fight the monochrome
+   page; colour comes back on hover */
+.avatar {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--glass-line);
+  box-shadow: 0 0 0 3px var(--glass);
+  filter: grayscale(1) contrast(1.05);
+  transition: filter 0.4s ease;
+}
+.avatar:hover { filter: none; }
+
 /* ------------------------------------------------------------
    widgets
    ------------------------------------------------------------ */
@@ -1010,8 +1029,10 @@ body::after {
 /* ============================================================
    interests
    ============================================================ */
+/* the strip closes out the about section, so it sits midway between the bio
+   and the next heading rather than hugging the text above it */
 .marquee {
-  margin-top: 20px;
+  margin-top: calc(var(--gap) * 0.65);
   overflow: hidden;
   /* soften both ends so chips arrive and leave rather than popping */
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
@@ -1028,6 +1049,8 @@ body::after {
 /* the spacing sits on the item, not as a flex gap: with a gap the duplicated
    half is half a gap wider than the original and the loop visibly jumps */
 .interests li { margin-right: 7px; }
+
+#about + .block { margin-top: calc(var(--gap) * 0.65); }
 
 .marquee:hover .interests,
 .marquee:focus-within .interests { animation-play-state: paused; }
