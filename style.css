@@ -339,6 +339,11 @@ h2 {
   font-weight: 500;
   color: var(--text);
 }
+.li-now {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--faint);
+}
 .li-role {
   font-size: 14.5px;
   color: var(--muted);
@@ -400,10 +405,20 @@ h2 {
   transform: translateY(-1px);
   transition: transform 0.18s ease, color 0.18s ease;
 }
-.projects a:hover .arrow {
+.projects a:hover .arrow,
+.p-more:hover .arrow {
   color: var(--text);
   transform: translate(2px, -3px);
 }
+
+.p-more {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--muted);
+  transition: color 0.15s ease;
+}
+.p-more:hover { color: var(--text); }
 
 
 /* ------------------------------------------------------------
@@ -426,7 +441,8 @@ h2 {
 
 /* a dotted rule under anything clickable, going solid on hover */
 .links a > span:not(.out),
-.projects .p-title {
+.projects .p-title,
+.p-more > span:not(.arrow) {
   text-decoration: underline;
   text-decoration-style: dotted;
   text-decoration-color: var(--faint);
@@ -435,7 +451,8 @@ h2 {
   transition: text-decoration-color 0.18s ease;
 }
 .links a:hover > span:not(.out),
-.projects a:hover .p-title { text-decoration-color: var(--text); }
+.projects a:hover .p-title,
+.p-more:hover > span:not(.arrow) { text-decoration-color: var(--text); }
 
 /* anything that opens a new tab grows a little arrow on hover */
 .links a[target="_blank"] .out {
