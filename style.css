@@ -11,7 +11,6 @@
   --line: #e7e7e3;
   --hover: #f3f3f0;
   --sel: #eceae5;
-  --dot: #4a9e6a;
 
   /* glass: a translucent fill, a hairline edge, and a highlight where the
      light catches the top lip. --spec is the pointer-tracked reflection. */
@@ -47,7 +46,6 @@
     --line: #232326;
     --hover: #17171a;
     --sel: #26262b;
-    --dot: #5cba80;
 
     --glass: rgba(255, 255, 255, 0.045);
     --glass-line: rgba(255, 255, 255, 0.10);
@@ -74,7 +72,6 @@
   --line: #232326;
   --hover: #17171a;
   --sel: #26262b;
-  --dot: #5cba80;
 
   --glass: rgba(255, 255, 255, 0.045);
   --glass-line: rgba(255, 255, 255, 0.10);
@@ -263,31 +260,13 @@ h2 {
 }
 
 .intro h1 {
-  font-size: 15px;
+  font-size: 21px;
   font-weight: 600;
   letter-spacing: -0.01em;
 }
 
 .role { color: var(--muted); }
-
-.who {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-/* greyscale so the photo's warm background doesn't fight the monochrome
-   page; colour comes back on hover */
-.avatar {
-  width: 56px;
-  height: 56px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  border: 1px solid var(--glass-line);
-  box-shadow: 0 0 0 3px var(--glass);
-  filter: grayscale(1) contrast(1.05);
-  transition: filter 0.4s ease;
-}
-.avatar:hover { filter: none; }
+.intro .role { font-size: 17px; }
 
 /* ------------------------------------------------------------
    widgets
@@ -325,9 +304,9 @@ h2 {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--dot);
+  background: var(--accent);
   flex-shrink: 0;
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--dot) 18%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
 }
 
 .block p { color: var(--muted); text-wrap: pretty; }
