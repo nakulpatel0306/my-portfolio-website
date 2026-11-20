@@ -1,17 +1,15 @@
-# Nakul Patel - Portfolio Website
+# Nakul Patel - Current Portfolio Website
 
-> **This is my current portfolio site.** It is live at https://nakul-patel.dev and is the one I keep updated.
+My personal developer portfolio and the version I keep updated: one lowercase column covering my work, projects, education, skills and how to reach me, in light or dark. Built with plain HTML, CSS and JavaScript. The old version is archived at [portfolio-website-archive](https://github.com/nakulpatel0306/portfolio-website-archive).
 
-My personal developer portfolio, built with plain HTML, CSS and JavaScript. One lowercase column covering my work, projects, education, skills and how to reach me, in light or dark.
-
-Live site: https://nakul-patel.dev
+**Live at [nakul-patel.dev](https://nakul-patel.dev)**
 
 ## At a Glance
 
-- **State:** Live and maintained.
-- **Resume:** `assets/nakul-patel-software-resume.pdf` (last updated September 2026)
-- **Stack:** HTML, CSS and JavaScript. No framework or build step.
-- **Hosting:** Cloudflare Workers, deployed on every push to `main`.
+- **Stack:** HTML, CSS and JavaScript. No framework or bundler; the build just copies files into `dist/`
+- **Hosting:** Cloudflare Workers, deployed on every push to `main`
+- **Resume:** [`assets/nakul-patel-software-resume.pdf`](assets/nakul-patel-software-resume.pdf) (last updated September 2026)
+- **State:** Live and actively maintained
 
 ## Features
 
@@ -57,4 +55,4 @@ To deploy by hand, run `npm run deploy`. It needs `npx wrangler login` once.
 
 ## Previous Versions
 
-Four earlier designs are in this repo's history: The World `2895f13`, Bento `53be7be`, Origin Story `27bf8d7` and an IDE-style build `a2260e1`. The site before all of them is archived at [portfolio-website-archive](https://github.com/nakulpatel0306/portfolio-website-archive).
+Four earlier designs can still be browsed as commits on GitHub: [The World](https://github.com/nakulpatel0306/my-portfolio-website/tree/2895f13), [Bento](https://github.com/nakulpatel0306/my-portfolio-website/tree/53be7be), [Origin Story](https://github.com/nakulpatel0306/my-portfolio-website/tree/27bf8d7) and an [IDE-style build](https://github.com/nakulpatel0306/my-portfolio-website/tree/a2260e1). The site before all of them is archived at [portfolio-website-archive](https://github.com/nakulpatel0306/portfolio-website-archive).
