@@ -8,7 +8,7 @@ My personal developer portfolio and the version I keep updated: one lowercase co
 
 - **Stack:** HTML, CSS and JavaScript. No framework or bundler; the build just copies files into `dist/`
 - **Hosting:** Cloudflare Workers, deployed on every push to `main`
-- **Resume:** [`assets/nakul-patel-software-resume.pdf`](assets/nakul-patel-software-resume.pdf) (last updated September 2026)
+- **Resume:** [`assets/nakul-patel-software-resume.pdf`](assets/nakul-patel-software-resume.pdf) (last updated November 2026)
 - **State:** Live and actively maintained
 
 ## Features
